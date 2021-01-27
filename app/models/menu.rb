@@ -21,8 +21,8 @@ class Menu < ApplicationRecord
   end
 
   def ensure_one_active
-    if self.is_active && changed.has_key?(:is_active)
-      update_attribute(:is_active, false)
+    if self.is_active && changed.include?("is_active")
+      Menu.where(:is_active => true).update_all(:is_active => false)
     end
   end
 end

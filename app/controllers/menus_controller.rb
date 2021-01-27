@@ -19,9 +19,9 @@ class MenusController < ApplicationController
 
   def show
     id = params[:id]
-    menu_item = MenuItem.find(id)
-
-    render plain: menu_item.to_string
+    menu = Menu.find(id)
+    menu_item_list = MenuItem.of_menu(menu.id).map { |item| item.to_string }.join("\n")
+    render plain: "#{menu.to_string}\n\n#{menu_item_list}"
   end
 
   def update
@@ -49,12 +49,5 @@ class MenusController < ApplicationController
     menu = Menu.find(id)
     menu.destroy
     render plain: "DELETED MENU WITH ID #{id}"
-  end
-
-  def show
-    id = params[:id]
-    menu = Menu.find(id)
-    menu_item_list = MenuItem.of_menu(menu.id).map { |item| item.to_string }.join("\n")
-    render plain: "#{menu.to_string}\n\n#{menu_item_list}"
   end
 end

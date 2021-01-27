@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resources :menu_items
   resources :menus
   resources :users
+  post "/login" => "users#login", as: :login_path
+  post "/signup" => "users#create", as: :signup_path
 end
