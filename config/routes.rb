@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :carts
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get "/", to: "home#index"
   resources :menu_items
   resources :menus
   resources :users
@@ -12,4 +13,8 @@ Rails.application.routes.draw do
   # cart
   get "/checkout" => "carts#index"
   resources :carts
+
+  # order
+  get "/orders/pending" => "orders#pending"
+  resources :orders
 end

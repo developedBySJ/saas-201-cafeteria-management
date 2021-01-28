@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :ensure_user_logged_in, only: [:index, :show]
 
   def index
     render plain: MenuItem.all.map { |item| item.to_string }.join("\n")
