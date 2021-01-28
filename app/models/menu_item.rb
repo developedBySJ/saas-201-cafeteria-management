@@ -13,9 +13,6 @@ class MenuItem < ApplicationRecord
     all.where(menu_id: id)
   end
 
-  def get_active_menu
-  end
-
   def to_string
     "#{id}| #{menu_id} | #{name} | #{description} | #{price}"
   end

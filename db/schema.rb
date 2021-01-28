@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_045600) do
+ActiveRecord::Schema.define(version: 2021_01_27_061612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "menu_item_id"
+    t.bigint "user_id"
+    t.integer "qty"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "menu_items", force: :cascade do |t|
     t.bigint "menu_id"
