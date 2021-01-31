@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :ensure_user_logged_in, only: [:dashboard]
 
   def index
-    render "home/index", :locals => { menu_items: MenuItem.get_active }
+    render "Home/index", :locals => { menu_items: MenuItem.get_active }
   end
 
   def login
@@ -14,6 +14,6 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    render "home/dashboard"
+    render "Home/dashboard"
   end
 end
