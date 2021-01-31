@@ -1,13 +1,26 @@
 class MenuItemsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   skip_before_action :ensure_user_logged_in, only: [:index, :show]
+  before_action do
+    limit_access_to(["admin"])
+  end
 
   def index
-    render plain: MenuItem.all.map { |item| item.to_string }.join("\n")
+    menu_items = MenuItem.all
+    render "menu_item/index", :locals => { menu_items: menu_items }
+  end
+
+  def new
+    render "menu_item/new"
+  end
+
+  def edit
+    menu_item = MenuItem.find(params[:id])
+    render :template => "menu_item/edit", :locals => { menu_item: menu_item }
   end
 
   def show
-    render plain: MenuItem.find(params[:id]).to_string
+    menu_item = MenuItem.find(params[:id])
+    render :template => "menu_item/show", :locals => { menu_item: menu_item }
   end
 
   def create
@@ -15,12 +28,17 @@ class MenuItemsController < ApplicationController
       menu_id: params[:menu_id],
       name: params[:name],
       description: params[:description],
+      image: params[:image],
+      is_veg: params[:is_veg],
+      prep_time: params[:prep_time],
       price: params[:price],
     })
     if new_menu_item.save
-      render plain: new_menu_item.to_string
+      redirect_to menu_item_url(new_menu_item)
     else
-      render plain: new_menu_item.errors.full_messages.join("\n")
+      error = new_menu_item.errors.full_messages
+      flash[:error] = error[0...3]
+      redirect_to new_menu_item_path
     end
   end
 
@@ -36,9 +54,12 @@ class MenuItemsController < ApplicationController
     new_menu_item.price = price if price
 
     if new_menu_item.save
-      render plain: new_menu_item.to_string
+      flash[:success] = ["Menu item Updated successfully"]
+      redirect_to menu_item_path(new_menu_item.id)
     else
-      render plain: new_menu_item.errors.full_messages.join("\n")
+      error = new_menu_item.errors.full_messages
+      flash[:error] = error[0...3]
+      redirect_to edit_menu_item_path(new_menu_item.id)
     end
   end
 
@@ -46,6 +67,6 @@ class MenuItemsController < ApplicationController
     id = params[:id]
     menu_item = MenuItem.find(id)
     menu_item.destroy
-    render plain: "DELETED MENU_ITEM WITH ID #{id}"
+    render plain: ["DELETED MENU_ITEM WITH ID #{id}"]
   end
 end

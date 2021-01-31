@@ -1,8 +1,10 @@
 class CartsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :ensure_user_logged_in
 
   def index
-    render plain: Cart.of_user(@current_user.id).map { |item| item.to_string }.join("\n")
+    cart_items = Cart.of_user(@current_user.id)
+    total = cart_items.reduce(0) { |total, cur| total + MenuItem.find(cur.menu_item_id).price * cur.qty }
+    render "carts/index", :locals => { cart_items: cart_items, total: total }
   end
 
   def show
@@ -19,12 +21,16 @@ class CartsController < ApplicationController
       result = Cart.add_to_cart(menu_item_id, user_id, qty)
 
       if result.save
-        render plain: result.to_string
+        flash[:success] = ["Menu Item Added To Cart"]
+        redirect_to "/"
       else
-        render plain: result.errors.full_messages.join("\n")
+        error = result.errors.full_messages
+        flash[:error] = error[0...3]
+        redirect_to "/"
       end
     else
-      render plain: "menu item does not exits"
+      flash[:error] = ["menu item does not exits"]
+      redirect_to "/"
     end
   end
 
@@ -32,19 +38,28 @@ class CartsController < ApplicationController
     id = params[:id]
     user_id = @current_user.id
     cart = Cart.find_by(id: id, user_id: user_id)
-    cart.destroy
-    render plain: "deleted"
+    if cart
+      cart.destroy
+    end
+    redirect_to "/checkout"
   end
 
   def update
     id = params[:id]
     user_id = @current_user.id
     cart = Cart.find_by(id: id, user_id: user_id)
-    cart.qty = params[:qty]
-    if cart.save
-      render plain: cart.to_string
+    qty = params[:qty]
+    if Integer(qty) < 1
+      cart.destroy
     else
-      render plain: cart.errors.full_messages.join("\n")
+      cart.qty = qty
+      if cart.save
+        flash[:success] = ["Cart updated successfully"]
+      else
+        error = cart.errors.full_messages
+        flash = error[0...3]
+      end
     end
+    redirect_to "/checkout"
   end
 end

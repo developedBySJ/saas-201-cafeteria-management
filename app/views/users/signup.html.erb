@@ -1,0 +1,53 @@
+<%= content_for(:form_layout) do %>
+  <div class="text-center mb-10">
+    <h1 class="font-bold text-3xl text-gray-900">Sign Up</h1>
+  </div>
+  <div>
+  <%= form_with url: signup_path, method: "post" do |form| %>
+    <div class="flex -mx-3">
+      <div class="w-1/2 px-3 mb-5">
+        <%= form.label :first_name, class: "text-xs font-semibold px-1" %>
+        <div class="flex">
+          <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
+          <%= form.text_field :first_name, class: "w-full -ml-10 pl-6 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-green-600", placeholder: "John" %>
+        </div>
+      </div>
+      <div class="w-1/2 px-3 mb-5">
+         <%= form.label :last_name, class: "text-xs font-semibold px-1" %>
+        <div class="flex">
+          <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
+          <%= form.text_field :last_name, class: "w-full -ml-10 pl-6 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-green-600", placeholder: "Smith" %>
+        </div>
+      </div>
+    </div>
+    <div class="flex -mx-3">
+      <div class="w-full px-3 mb-5">
+        <%= form.label :email, class: "text-xs font-semibold px-1" %>
+        <div class="flex">
+          <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
+          <%= form.email_field :email, class: "w-full -ml-10 pl-6 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-green-600", placeholder: "johnsmith@example.com" %>
+        </div>
+      </div>
+    </div>
+    <div class="flex -mx-3">
+      <div class="w-full px-3 mb-5">
+        <%= form.label :password, class: "text-xs font-semibold px-1" %>
+        <div class="flex">
+          <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
+          <%= form.password_field :password, class: "w-full -ml-10 pl-6 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-green-600", placeholder: "************" %>
+        </div>
+      </div>
+    </div>
+    <div class="mb-6 text-center">
+      <p class="text-base font-semibold px-1 inline-block">Already have account?</p>
+      <a href="/login" class="text-base font-semibold px-1 text-green-800">Login</a>
+    </div>
+    <div class="flex -mx-3">
+      <div class="w-full px-3 mb-5">
+        
+        <input type="submit" class="block w-full mx-auto bg-green-500 hover:bg-green-700 focus:bg-green-700 text-white rounded-lg px-3 py-3 font-semibold" value="SIGN UP"/>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% end %>

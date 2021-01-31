@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>CafeteriaManagement</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,10 +12,8 @@
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
   </head>
 
-  <body style="margin-top:10vh;" >
-    <%= render partial: "layouts/header" %>
-
-    <main style="min-height:75vh" >
+  <body>
+  <%= render partial: "layouts/header" %>
 
     <% if flash[:success] %>
       <ul class="flash fixed top-10 left-1/2 transform-gpu -translate-x-1/2 w-full px-4" style="z-index:100">
@@ -32,10 +30,16 @@
     <% end %>
       </ul>
     <% end %>
-
-    <%= yield %>
-
-    </main>
+   <div class="min-h-screen flex items-center justify-center px-5 py-5">
+    <div class="bg-green-50 text-green-800 rounded-3xl shadow overflow-hidden" style="max-width:1000px">
+      <div class="md:flex">
+        <div class="py-10 px-5 md:px-10">
+            <%= yield :form_layout %>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
     <%= render partial: "layouts/footer" %>
     <script>
     (function init() {
@@ -47,7 +51,8 @@
           }, 3000);
         });
       })();
-
     </script>
   </body>
 </html>
+
+

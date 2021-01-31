@@ -1,0 +1,56 @@
+<div class="max-w-screen-lg mx-auto min-h-screen pt-12">
+  <div class="p-9 m-4 bg-green-50 rounded-lg">
+    <h1 class="text-2xl font-semibold mb-4">Invoice <span class="inline text-sm text-green-600 mb-4 opacity-6">Date : <%= order.created_at %> </span></h1>
+    
+    <div>
+      <div class="border-t-2 border-b-2 border-green-100 py-3 mb-3">
+        <h1 class="text-base font-semibold mb-3">Order Id : #<%= order.id %> </h1>
+        <h1 class="text-base font-semibold mb-2">
+          Cutomer Name : <%= order.user_name %>
+        </h1>
+        <h1 class="text-base font-semibold mb-2">Customer Id : #<%= order.user_id %></h1>
+        <h1 class="text-base font-semibold mb-2">Order Status : <%= order.delivered_at ? "Delivered" : "Pending" %> <span class="text-sm opacity-50 text-green-900 " > <%= order.delivered_at %></span> </h1>
+      </div>
+      <h1 class="text-base mb-2">Menu Items</h1>
+      <ul class="list-decimal mt-2">
+      <div>
+      <% order_items.each do |item| %>
+      <li class="mb-3 list-none" >
+      <div class="list-decimal flex items-center justify-between">
+          <span class="sm:w-2/3" ><%= item.menu_item_name %> </span> <span> X <%= item.qty %></span><span> Rs.<%= item.menu_item_price %></span>
+        </div> 
+        <span class="text-sm text-green-700">#<%= item.menu_item_id %></span>
+        </li>
+      <% end %>
+      </ul>
+      <div class="">
+        <h1 class="text-2xl font-semibold mb-4"></h1>
+        <div
+          class="mb-4 border-b border-t pb-4 text-base border-green-200 py-5"
+        >
+          <div class="flex justify-between">
+            <p>Sub Total</p>
+            <p><%= sprintf "%.2f", order.total_price %></p>
+          </div>
+          <div class="flex justify-between">
+            <p>Tax <span>(inclusive)</span></p>
+            <p><%= sprintf "%.2f", order.total_price * 0.12 %></p>
+          </div>
+          <div class="flex justify-between">
+            <p>Delivery Charges</p>
+            <p>+ 40.00</p>
+          </div>
+          <div class="flex justify-between">
+            <p>Discount</p>
+            <p>- 40.00</p>
+          </div>
+        </div>
+        <h1
+          class="text-green-800 text-xl font-semibold mb-3 flex items-center justify-between"
+        >
+          <span>Grand Total</span> <span> Rs.<%= sprintf "%.2f", order.total_price %></span>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Roasted-Chicken-Fusilli",
+    "is_veg": false,
+    "prep_time": 35,
+    "price": 229,
+    "description": "This dish comes with perfectly cooked fusilli pasta tossed in our secret sauces mixture along with all fresh veggies, sliced grilled chicken strips, finished with olive oil. Go ahead and dig right in.",
+    "image": "//d3gy1em549lxx2.cloudfront.net/d707b715-ba31-4de2-b0d2-13ad31a418a0.JPG",
+    "ingredients": "Chicken Breast Boneless, Fusilli, Bbq Sauce, Peri Peri Sauce, Worcestershire Sauce, Tri Bell Peppers, Pasta Sauce, Herbs"
+  },
+  {
+    "name": "The Mafia's Meal",
+    "is_veg": false,
+    "prep_time": 25,
+    "price": 249,
+    "description": "Habanero-spiced, roasted chicken breast topped with gooey mozzarella is served with seasonal veggies and spaghetti tossed with a freshly made herbed tomato sauce. Finished off with hand-torn basil leaves, tangy olives and handful of grated parmesan, this meal is the real Mexi-talian deal!",
+    "image": "//d3gy1em549lxx2.cloudfront.net/9f7b1c6a-6cbe-4cdf-86f1-1b879ba59324.jpg",
+    "ingredients": "Chicken, Spaghetti, Zucchini, Tomato, Habanero, Dijon Mustard, Garlic, Olive, Basil, Mozzarella, Chilli Flakes, Dried Herbs, Lemon Juice, Pepper, Parsley"
+  },
+  {
+    "name": "Penne Alfredo",
+    "is_veg": true,
+    "prep_time": 30,
+    "price": 209,
+    "description": "Penne pasta tossed in a luscious alfredo sauce along with veggies, finished off with fresh parsley and grated cheese. Bring out the Kid-in-You!",
+    "image": "//d3gy1em549lxx2.cloudfront.net/da0ceae2-e122-470c-ac98-5a9d8813c654.jpg",
+    "ingredients": "Penne, Parmesan, Broccoli, Bell Pepper, Olive, Béchamel, Nutmeg"
+  },
+  {
+    "name": "Chicken-Tikka Dum Biriyani",
+    "is_veg": false,
+    "prep_time": 45,
+    "price": 219,
+    "description": "Most-loved juicy chicken tikkas with freshly ground biriyani masala and premium basmati steamed shut in the age-old dum phukt style – a delicious fare of delectable flavours.",
+    "image": "//d3gy1em549lxx2.cloudfront.net/aea8390a-456d-4599-a4f8-bc490eb59910.JPG",
+    "ingredients": "Chicken Tikka, Freshly Ground In-House Biriyani Masala,, Premium Basmati"
+  },
+  {
+    "name": "Achari Paneer Tikka Wrap",
+    "is_veg": true,
+    "prep_time": 10,
+    "price": 139,
+    "description": "Dig into this spicy-tangy treat of cottage cheese, vibrant bell peppers and onions and drive those hunger woes away as they strike. Laid snugly in a soft whole wheat Paratha, this dish will tickle your senses with its explosive flavours and hearty textures.",
+    "image": "//d3gy1em549lxx2.cloudfront.net/28180fe1-b815-4085-a17c-cb45de65646f.jpg",
+    "ingredients": "Paneer, Capsicum, Deggi Mirch,Turmeric, Hung Curd, Onions, Lachha Paratha"
+  },
+  {
+    "name": "Pineapple Cake Slice",
+    "is_veg": true,
+    "prep_time": 2,
+    "price": 99,
+    "description": "An exotic flavour of pineapple invites you to enjoy and cherish this pastry that is truly delicious and one of the favourites of all.",
+    "image": "//d3gy1em549lxx2.cloudfront.net/e45b0e2a-6009-4ba0-8ad9-83ab1332d9ba.jpg",
+    "ingredients": "Pineapple, Whipped Cream, Vanilla, All-Purpose Flour, Butter, Sugar"
+  }
+]

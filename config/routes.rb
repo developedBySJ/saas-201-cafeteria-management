@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   resources :users
 
   # auth
-  post "/login" => "users#login", as: :login_path
+  get "/login" => "home#login", as: :login_path
+  post "/login" => "users#login"
+
+  delete "/logout" => "users#logout", as: :logout
+
+  get "/signup" => "home#signup"
   post "/signup" => "users#create", as: :signup_path
 
   # cart
@@ -17,4 +22,8 @@ Rails.application.routes.draw do
   # order
   get "/orders/pending" => "orders#pending"
   resources :orders
+
+  # dashboard
+
+  get "/dashboard" => "home#dashboard"
 end

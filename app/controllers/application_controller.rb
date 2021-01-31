@@ -1,10 +1,17 @@
 class ApplicationController < ActionController::Base
-  @current_user = nil
+  before_action :current_user
   before_action :ensure_user_logged_in
 
   def ensure_user_logged_in
     unless current_user
-      redirect_to "/"
+      redirect_to "/login"
+    end
+  end
+
+  def limit_access_to(roles)
+    unless roles.index(@current_user.role)
+      flash[:error] = ["You don't have enough permissions"]
+      return redirect_to "/dashboard"
     end
   end
 
@@ -13,8 +20,7 @@ class ApplicationController < ActionController::Base
     current_user_id = session[:current_user_id]
     if current_user_id
       @current_user = User.find(current_user_id)
-    else
-      nil
     end
+    @current_user
   end
 end

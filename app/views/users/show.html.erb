@@ -1,0 +1,26 @@
+<div class="p-8 max-w-screen-sm mx-auto truncate">
+  <h1 class="text-3xl font-semibold mb-6 border-b pb-6 text-green-900">Profile</h1>
+  <div class="flex mb-3">
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">Customer Id</h1>
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">: #<%= user.id %></h1>
+  </div>
+  <div class="flex mb-3">
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">First Name</h1>
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">: <%= user.first_name %></h1>
+  </div>
+  <div class="flex mb-3">
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">Last Name</h1>
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">: <%= user.last_name %></h1>
+  </div>
+  <div class="flex mb-3">
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">Email</h1>
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">: <%= user.email %></h1>
+  </div>
+  <div class="flex mb-3">
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">Role</h1>
+    <h1 class="text-xl font-semibold w-1/2 text-green-700">: <%= user.role %></h1>
+  </div>
+  <div class="flex mt-10 border-t">
+    <a href=<%= edit_user_path(user.id) %> class="text-center block w-full mx-auto bg-green-500 hover:bg-green-700 focus:bg-green-700 text-white rounded-lg px-2 py-2 font-semibold mt-7">Edit Profile</a>
+  </div>
+</div>

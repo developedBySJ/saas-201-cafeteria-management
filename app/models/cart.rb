@@ -8,7 +8,7 @@ class Cart < ApplicationRecord
   validates :qty, numericality: { greater_than: 0 }
 
   def self.of_user(id)
-    all.where(user_id: id)
+    all.where(user_id: id).order(:created_at)
   end
 
   def to_string

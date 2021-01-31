@@ -1,0 +1,32 @@
+<div class="px-4 py-6 bg-green-50 rounded-2xl">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center">
+      <img src=<%= menu_item.image %> width="60" class="rounded-full" style="width:56px;height:56px"/>
+      <div class="flex flex-col mx-3">
+        <a href=<%= menu_item_url(menu_item.id) %> class="md:text-md font-medium mb-1 text-green-800"><%= menu_item.name %></a>
+        <div class="flex-1 inline-flex items-center">
+          <div class="border-2 border-<%= menu_item.is_veg ? "green" : "red" %>-500 mr-2 rounded flex items-center justify-center" style="width:16px;height:16px;">
+            <span class="bg-<%= menu_item.is_veg ? "green" : "red" %>-500 rounded-xl" style="width:4px;height:4px;"></span>
+          </div>
+          <p class="text-<%= menu_item.is_veg ? "green" : "red" %>-600"><%= menu_item.is_veg ? "Veg" : "Non Veg" %></p>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center items-center">
+      <div class="pr-8 flex items-center justify-center">
+      <%= link_to "-", "#{cart_path(cart_item.id)}?qty=#{cart_item.qty - 1}", method: "patch", class: "p-3 bg-green-100 border border-green-200" %>
+        <div class="p-3 mx-1"><%= cart_item.qty %></div>
+      <%= link_to "+", "#{cart_path(cart_item.id)}?qty=#{cart_item.qty + 1}", method: "patch", class: "p-3 bg-green-100 border border-green-200" %>
+        
+      </div>
+      <div class="pr-8"><span class="text-green-800 text-lg">Rs.<%= menu_item.price * cart_item.qty %></span></div>
+
+      <div class="pr-8">
+        <%= link_to "#{cart_path(cart_item.id)}", method: :delete do %>
+          <img src=<%= image_path("trash.svg") %>/>
+        <% end %>
+      </div>
+      <div><i class="fa fa-close text-xs font-medium"></i></div>
+    </div>
+  </div>
+</div>

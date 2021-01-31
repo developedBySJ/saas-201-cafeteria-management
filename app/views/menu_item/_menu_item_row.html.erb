@@ -1,0 +1,27 @@
+<tr class="bg-white sm:hover:bg-green-50 flex sm:table-row flex-row sm:flex-row flex-wrap sm:flex-no-wrap mb-10 sm:mb-0">
+      <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static underline">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Item Id</span>
+        <a href= <%= menu_item_path(item.id) %> > # <%= item.id %> </a>
+      </td>
+      <% if show_menu_id %>
+      <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static underline">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Menu Id</span>
+        <a href=<%= menu_path(item.menu_id) %>> # <%= item.menu_id %> </a>
+      </td>  
+      <% end %>
+      
+      <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Name</span>
+        <%= item.name %>
+      </td>
+      <td class="w-full sm:w-auto p-3 text-center border border-b block sm:table-cell relative sm:static">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Price</span>
+        <%= item.price %>
+      </td>
+      <td class="w-full sm:w-auto p-3 text-green-900 text-center border border-b block sm:table-cell relative sm:static">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
+        <a href=<%= edit_menu_item_path(item.id) %> class="px-3 py-1 rounded text-blue-900 bg-blue-200">Edit</a>
+        <%= link_to "Delete", menu_item_path(item.id), method: "delete", class: "px-3 py-1 rounded text-red-900 bg-red-200" %>
+
+      </td>
+</tr>

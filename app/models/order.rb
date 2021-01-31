@@ -10,6 +10,10 @@ class Order < ApplicationRecord
     "#{id} | #{user_id} | #{delivered_at} | #{total_price}"
   end
 
+  def self.of_user(id)
+    all.where(user_id: id)
+  end
+
   def self.pending_orders
     all.where(delivered_at: nil)
   end

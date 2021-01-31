@@ -1,34 +1,56 @@
 class OrdersController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :ensure_user_logged_in
+
+  before_action except: [:index, :pending, :show, :create, :update, :destroy] do
+    limit_access_to(["admin"])
+  end
+  before_action except: [:index, :show, :create] do
+    limit_access_to(["admin", "clerk"])
+  end
 
   def index
-    render plain: Order.all.map { |order| order.to_string }.join("\n")
+    orders = []
+    user = @current_user
+    if user.role == "admin"
+      orders = Order.all
+    elsif user.role == "clerk"
+      return redirect_to orders_pending_path
+    else
+      orders = Order.of_user(user.id)
+    end
+    render "orders/index", :locals => { orders: orders.order(created_at: :desc) }
   end
 
   def show
     id = params[:id]
     order_details = Order.find(id)
-    order_items = OrderItem.of_order(id)
-    render plain: "#{order_details.to_string} \n #{order_items.map { |order| order.to_string }.join("\n")}"
+    if (@current_user == "admin" || @current_user.id == order_details.user_id)
+      order_items = OrderItem.of_order(id)
+      render "orders/invoice", :locals => { order: order_details, order_items: order_items }
+    else
+      redirect_to "/dashboard"
+    end
   end
 
   def pending
-    render plain: Order.pending_orders.map { |order| "#####{order.id}####\n\n#{OrderItem.of_order(order.id).map { |o| o.to_string }.join("\n")}" }.join("\n")
+    orders = Order.pending_orders
+    render "orders/pending", :locals => { orders: orders.order(created_at: :asc) }
   end
 
   def create
-    user_id = @current_user.id
-    cart = Cart.of_user(user_id)
-
+    user_name = @current_user.role == "customer" ? "#{@current_user.first_name} #{@current_user.last_name}" : "Walk in customer"
+    cart = Cart.of_user(@current_user.id)
     if cart.count < 1
-      return render plain: "CART IS EMPTY"
-    else
-      total = cart.reduce(0) { |total, cur| total + MenuItem.find(cur.menu_item_id).price * cur.qty }
-      new_order = Order.new({
-        total_price: total,
-        user_id: user_id,
-      })
-      new_order.save
+      flash[:error] = ["Add At Least One Item To Cary"]
+      return redirect_to "/"
+    end
+    total = cart.reduce(0) { |total, cur| total + MenuItem.find(cur.menu_item_id).price * cur.qty }
+    new_order = Order.new({
+      total_price: total,
+      user_id: @current_user.id,
+      user_name: user_name,
+    })
+    if new_order.save
       order = cart.map do |item|
         menu_item = MenuItem.find(item.menu_item_id)
         order_item = {
@@ -40,10 +62,13 @@ class OrdersController < ApplicationController
         }
         order_item
       end
-      x = OrderItem.create(order)
-      pp x
-      Cart.of_user(user_id).destroy_all
-      return render plain: "#{x.map { |order| order.to_string }.join("\n")} \n cart : #{total} "
+      order_items = OrderItem.create(order)
+      Cart.of_user(@current_user.id).destroy_all
+      flash[:success] = ["Order created successfully"]
+      redirect_to order_path(new_order.id)
+    else
+      flash[:error] = ["Unable to create order please try again later"]
+      redirect_to "/checkout"
     end
   end
 
@@ -51,11 +76,12 @@ class OrdersController < ApplicationController
     # if (@current_user.role == "admin")
     id = params[:id]
 
-    delivered_at = params[:id]
+    delivered_at = params[:delivered_at]
     order = Order.find(id)
     order.delivered_at = delivered_at ? Time.parse(delivered_at) : Time.now.iso8601()
     order.save
-    render plain: order.to_string
+    flash[:success] = ["Order with id ##{order.id} updated successfully"]
+    redirect_to orders_path
     # else
     # render plain: "forbidden"
     # end
@@ -63,8 +89,9 @@ class OrdersController < ApplicationController
 
   def destroy
     id = params[:id]
-    order = Order.find(id)
+    order = Order.where({ id: id, delivered_at: nil })
     order.destroy
-    render plain: "deleted"
+    flash[:success] = ["Deleted order with id #{order.id}"]
+    render order_path
   end
 end

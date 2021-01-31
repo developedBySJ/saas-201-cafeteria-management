@@ -1,0 +1,24 @@
+<tr class="bg-white sm:hover:bg-green-50 flex sm:table-row flex-row sm:flex-row flex-wrap sm:flex-no-wrap mb-10 sm:mb-0">
+      <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static underline">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">User Id</span>
+        <a href=<%= user_path(user.id) %>> # <%= user.id %></a>
+      </td>
+      <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Name</span>
+        <%= user.first_name %> <%= user.last_name %> <%= "( You )" if user.id == @current_user.id %>
+      </td>
+      <% color = user.role == "admin" ? "red" : user.role == "clerk" ? "yellow" : "gray" %>
+      <td class="capitalize w-full sm:w-auto p-3 text-center border border-b block sm:table-cell relative sm:static text-<%= color %>-900 bg-<%= color %>-100">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Role</span>
+        <%= user.role %>
+      </td>
+      
+      <td class="w-full sm:w-auto p-3 text-green-900 text-center border border-b block sm:table-cell relative sm:static">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
+        <a href=<%= edit_user_path(user.id) %> class="px-3 py-1 rounded text-blue-900 bg-blue-200">Edit</a>
+        <% if !(user.id == @current_user.id) %>
+          <%= link_to "Delete", user_path(user.id), method: "delete", class: "px-3 py-1 rounded text-red-900 bg-red-200" %>
+        <% end %>
+      </td>
+</tr>
+

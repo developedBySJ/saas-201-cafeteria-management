@@ -1,0 +1,20 @@
+<header>
+  <nav class="bg-white fixed z-10 mx-auto inset-x-0 top-0  shadow py-2 rounded-b-2xl">
+  <div class="mx-auto flex justify-between items-center" style="max-width:1024px">
+        <a href="/" class="font-mono m-3 uppercase inline-flex text-green-900 transition-all duration-300"> Ruby Rocks </a>
+        <div class="mr-3">
+        <% if @current_user %>
+
+          <a href="/dashboard" class="py-2 font-medium text-green-700 rounded"><%= @current_user.first_name %></a>
+          <%= link_to "Log Out", logout_url, method: "delete", class: "px-6 py-2 font-medium text-green-900 rounded" %>
+          <a href='/checkout' class="inline">
+            <img src=<%= image_path("cart.svg") %> alt="cart icon" class="inline"/>
+          </a>
+        <% else %>
+          <a href="/signup" class="px-6 py-2 font-medium text-green-800 rounded mr-1">Sign Up</a>
+          <a href="/login" class="bg-green-500 px-6 py-2 font-medium text-white rounded ml-1">Login</a>   
+        <% end %>
+        </div>
+  </div>
+  </nav>
+</header>
