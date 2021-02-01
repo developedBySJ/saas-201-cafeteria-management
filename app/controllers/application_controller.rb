@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def limit_access_to(roles)
-    unless roles.index(@current_user.role)
+    unless @current_user && roles.index(@current_user.role)
       flash[:error] = ["You don't have enough permissions"]
       return redirect_to "/dashboard"
     end

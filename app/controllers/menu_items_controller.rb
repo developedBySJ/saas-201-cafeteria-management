@@ -1,6 +1,6 @@
 class MenuItemsController < ApplicationController
   skip_before_action :ensure_user_logged_in, only: [:index, :show]
-  before_action do
+  before_action except: [:show] do
     limit_access_to(["admin"])
   end
 
