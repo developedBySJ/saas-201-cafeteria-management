@@ -1,24 +1,12 @@
-# README
+# Cafeteria Management
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[https://swapnil-cafeteria-management.herokuapp.com/](https://swapnil-cafeteria-management.herokuapp.com/)
 
-Things you may want to cover:
+## Usage
 
-* Ruby version
+> Account Details :
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Admin Account : admin@email.com
+- Clerk Account : clerk@email.com
+- Customer Account : customer@email.com
+- Password : 123456
