@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :orders
 
   # dashboard
-
   get "/dashboard" => "home#dashboard"
+
+  #sales
+  get "/sales" => "sales#index"
 end

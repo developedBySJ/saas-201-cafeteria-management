@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  skip_before_action :ensure_user_logged_in
-
   before_action except: [:index, :pending, :show, :create, :update, :destroy] do
     limit_access_to(["admin"])
   end
@@ -24,7 +22,7 @@ class OrdersController < ApplicationController
   def show
     id = params[:id]
     order_details = Order.find(id)
-    if (@current_user == "admin" || @current_user.id == order_details.user_id)
+    if (@current_user.role == "admin" || @current_user.id == order_details.user_id)
       order_items = OrderItem.of_order(id)
       render "orders/invoice", :locals => { order: order_details, order_items: order_items }
     else
@@ -78,7 +76,7 @@ class OrdersController < ApplicationController
 
     delivered_at = params[:delivered_at]
     order = Order.find(id)
-    order.delivered_at = delivered_at ? Time.parse(delivered_at) : Time.now.iso8601()
+    order.delivered_at = delivered_at ? Time.parse(delivered_at) : Time.now
     order.save
     flash[:success] = ["Order with id ##{order.id} updated successfully"]
     redirect_to orders_path

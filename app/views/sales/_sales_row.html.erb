@@ -1,0 +1,22 @@
+<tr class="bg-white sm:hover:bg-green-50 flex sm:table-row flex-row sm:flex-row flex-wrap sm:flex-no-wrap mb-10 sm:mb-0">
+  <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static underline">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Order Id</span>
+        <a href=<%= order_path(order.id) %>> #<%= order.id %></a>
+  </td>
+    <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static underline">
+      <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Customer</span>
+          <a href=<%= user_path(order.user_id) %>> #<%= order.user_id %> <%= order.user_name %></a>
+    </td>
+    <td class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static">
+      <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Created At</span>
+          <%= order.created_at %>
+      </td>
+      <td class="w-full sm:w-auto p-3 text-center border border-b block sm:table-cell relative sm:static text-green-900 bg-<%= order.delivered_at ? "green" : "yellow" %>-200">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Status</span>
+        <%= order.delivered_at ? "Delivered" : "Pending" %>
+      </td>
+      <td class="w-full sm:w-auto p-3 text-green-900 text-center border border-b block sm:table-cell relative sm:static">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Total Amount</span>
+        ₹<%= order.total_price %>
+   </td>
+</tr>

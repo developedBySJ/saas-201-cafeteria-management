@@ -1,6 +1,4 @@
 class CartsController < ApplicationController
-  skip_before_action :ensure_user_logged_in
-
   def index
     cart_items = Cart.of_user(@current_user.id)
     total = cart_items.reduce(0) { |total, cur| total + MenuItem.find(cur.menu_item_id).price * cur.qty }

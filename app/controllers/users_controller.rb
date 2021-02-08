@@ -82,11 +82,11 @@ class UsersController < ApplicationController
       last_name: params[:last_name],
       email: email,
       password: params[:password],
-      role: @current_user.role == "admin" ? params[:role] : "customer",
+      role: (@current_user && @current_user.role == "admin") ? params[:role] : "customer",
     })
 
     if new_user.save
-      if !@current_user.role == "admin"
+      if (@current_user && !@current_user.role == "admin")
         session[:current_user_id] = new_user.id
         redirect_to "/"
       else
@@ -96,8 +96,8 @@ class UsersController < ApplicationController
     else
       error = new_user.errors.full_messages
       flash[:error] = error[0...3]
-      if !@current_user.role == "admin"
-        redirect_to signup_path
+      if !@current_user || !@current_user.role == "admin"
+        redirect_to "/signup"
       else
         redirect_to new_user_path
       end
