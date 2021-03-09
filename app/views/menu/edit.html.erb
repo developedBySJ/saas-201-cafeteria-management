@@ -1,6 +1,9 @@
 <div class="max-w-screen-sm mx-auto">
   <div class="p-6 w-full">
     <h1 class="text-3xl py-3 border-b border-green-900 mb-4 pb-4 border-opacity-20">Edit Menu</h1>
+    <a href=<%= "#{menu_url(menu.id)}" %>  class="ml-2 mb-4 inline-block  text-lg py-1 bg-green-200 px-4 rounded-lg">Edit Products</a>
+     <a href=<%= "#{new_menu_item_path}" %>  class="ml-2 mb-4 inline-block  text-lg py-1 bg-gray-200 px-4 rounded-lg">Add Products</a>
+     
      <%= form_with url: menu_path, method: "patch" do |form| %> 
     <div class="px-3 mb-5">
       <%= form.label :name, "Name" %>

@@ -7,10 +7,15 @@ class OrdersController < ApplicationController
   end
 
   def index
+    user_id = params[:user_id]
     orders = []
     user = @current_user
     if user.role == "admin"
-      orders = Order.all
+      if (user_id)
+        orders = Order.of_user(user_id)
+      else
+        orders = Order.all
+      end
     elsif user.role == "clerk"
       return redirect_to orders_pending_path
     else

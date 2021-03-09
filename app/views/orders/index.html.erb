@@ -7,7 +7,7 @@
       <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Customer</th>
       <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Created At</th>
       <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Status</th>
-      <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Actions</th>
+      <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell"><%= @current_user.role == "customer" ? "Total" : "Actions" %></th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +19,7 @@
   <tr class="bg-white sm:hover:bg-green-50 flex sm:table-row flex-row sm:flex-row flex-wrap sm:flex-no-wrap mb-10 sm:mb-0">
  <td colspan="5"  class="w-full sm:w-auto p-3 text-green-800 text-center border border-b block sm:table-cell relative sm:static">
         
-    <h1 class="text-xl font-medium">No Pending Orders</h1>
+    <h1 class="text-xl font-medium">No Orders</h1>
   </td>
   </tr>
   <% end %>  

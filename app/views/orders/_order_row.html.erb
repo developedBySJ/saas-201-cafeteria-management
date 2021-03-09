@@ -15,6 +15,12 @@
         <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Status</span>
         <%= order.delivered_at ? "Delivered" : "Pending" %>
       </td>
+      <% if @current_user.role == "customer" %>
+        <td class="w-full sm:w-auto p-3 text-center border border-b block sm:table-cell relative sm:static text-green-900">
+        <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Total</span>
+        ₹<%= order.total_price %>
+      </td>
+      <% else %>
       <td class="w-full sm:w-auto p-3 text-green-900 text-center border border-b block sm:table-cell relative sm:static">
         <span class="sm:hidden absolute top-0 left-0 bg-green-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
         <% if !order.delivered_at %>
@@ -23,5 +29,7 @@
             <% else %>
             <a href=<%= order_path(order.id) %> class="px-3 py-1 rounded underline">Delivered At : <%= order.delivered_at %> </a>
         <% end %>
-   </td>
+     </td>  
+      <% end %>
+      
 </tr>

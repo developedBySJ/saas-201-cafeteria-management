@@ -21,6 +21,12 @@
     <h1 class="text-xl font-semibold w-1/2 text-green-700">Role</h1>
     <h1 class="text-xl font-semibold w-1/2 text-green-700">: <%= user.role %></h1>
   </div>
+  <% if @current_user.role == "admin" %>
+    <div class="flex mt-10 border-t">
+      <a href=<%= "#{orders_path}?user_id=#{user.id}" %> class="text-center block w-full mx-auto bg-gray-200 hover:bg-gray-300 focus:bg-gray-500  rounded-lg px-2 py-2 font-semibold mt-7">Show Orders</a>
+    </div>  
+  <% end %>
+  
   <div class="flex mt-10 border-t">
     <a href=<%= edit_user_path(user.id) %> class="text-center block w-full mx-auto bg-green-500 hover:bg-green-700 focus:bg-green-700 text-white rounded-lg px-2 py-2 font-semibold mt-7">Edit Profile</a>
   </div>

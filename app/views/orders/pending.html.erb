@@ -7,7 +7,7 @@
       <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Customer</th>
       <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Created At</th>
       <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Status</th>
-      <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell">Actions</th>
+      <th class="p-3 font-bold uppercase bg-green-200 text-green-900 border border-green-300 hidden sm:table-cell"><%= @current_user.role == "customer" ? "Total" : "Actions" %></th>
     </tr>
   </thead>
   <tbody>
